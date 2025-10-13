@@ -1,18 +1,21 @@
 class Solution:
     def merge(self, nums1, m: int, nums2, n: int) -> None:
-        nums3 = []
-        if not nums2:
-            return
-        p1, p2 = 0, 0
-        for i in range(m + n):
-            if nums2[p2] > nums1[p1] and p1 < m:
-                nums3.append(nums1[p1])
-                p1 += 1 
-            else: 
-                nums3.append(nums2[p2])
-                p2 += 1
-        nums1 = nums3
-        """
-        Do not return anything, modify nums1 in-place instead.
-        """
-        
+        i = n + m - 1
+        m -= 1
+        n -= 1 
+        while i >= 0:
+            if n == -1:
+                return
+            elif m == -1:
+                for i in range(n, -1, -1):
+                    nums1[i] = nums2[i] 
+            elif nums1[m] >= nums2[n]:
+                nums1[i] = nums1[m]
+                m -= 1
+            else:
+                nums1[i] = nums2[n]
+                n -= 1 
+            i -= 1
+
+Solution().merge([4,5,6,0,0,0]
+, 3 , [1,2,3], 3 )
