@@ -14,10 +14,10 @@ class Solution:
             p1 -= 1
         while p2 != -1:
             carry = sum(int(b[p2]), 0, carry, inverted_result)
-            p1 -= 1
+            p2 -= 1
         if carry :
             inverted_result.append(1)
-
+        
         return "".join(str(n) for n in inverted_result[::-1])
     
 def sum(a, b, carry, list) : # returns carry
