@@ -13,56 +13,19 @@ class Solution(object):
         :type root: Optional[TreeNode]
         :rtype: bool
         """
-        nextLayer = [root]
+        if not root: return False
+        return self.isMirror(root.left, root.right)
 
-        while True:
-            nextLayer = getNextLayer(nextLayer)
-            if  nextLayer:
-                if not isSymetricLayer(nextLayer):
-                    return False 
-            else: 
-                break
-
-        return True
-
-def getNextLayer(layer):
-    nextLayer = []
-
-    for node in layer:
-        if not node:
-            nextLayer.append(None)
-            nextLayer.append(None)
-        else:
-            nextLayer.append(node.left)
-            nextLayer.append(node.right)
-
-    foundNotNone=False
-    for node in nextLayer:
-        if node:
-            foundNotNone = True    
-    if foundNotNone:
-        return nextLayer
-    else: return None
-
-    pass
-
-def isSymetricLayer(layer):
-    r = len(layer)
-
-    for l in range(0, len(layer)//2):
-        r -= 1
-        if layer[l] is None and layer[r] is None:
-            continue
-        
-        if (layer[l] is None or layer[r] is None):
+    def isMirror(self, left, right):
+        if not left and not right:
+            return True
+        if not left or not right:
             return False
+        return left.val == right.val and \
+            self.isMirror(left.left, right.right) and self.isMirror(left.right, right.left)
 
-        if layer[l].val != layer[r].val:
-            return False
-        
-
-    return True
-
+    
+    
 Solution().isSymmetric(
     TreeNode(1, left=TreeNode(
         val=2,
